@@ -1,0 +1,245 @@
+body {
+  // background-image: url('https://image.shutterstock.com/image-photo/electric-scooter-on-white-concrete-260nw-1134117977.jpg');
+  background: url('https://i.pinimg.com/originals/07/00/e6/0700e64e50192aaee61f648e26f0699f.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.App {
+  
+  text-align: center;
+  /* display: flex; */
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 3s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.create-box {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+}
+.create-form {
+  display: flex;
+  
+  flex-direction: column;
+}
+.list-box {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  
+}
+button,
+input {
+  margin: 10px;
+}
+.kvc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+$color: rgb(20, 212, 49);
+.btn {
+  display: inline-block;
+  padding: .3rem 0.7rem;
+  margin: 5px;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: .6rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color, 15%);
+    transition: all .3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+
+}
+.item,
+.item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+$colorred: crimson;
+.red-button {
+  background-color: crimson;
+
+&:after{
+  background-color: $colorred;
+}
+&:before {
+  background-color: darken($colorred, 15%);
+}
+} 
+
+// Modal styling
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.6);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modalContainer {
+  min-width: 500px;
+  // height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modalContainer .modalForm {
+  // flex: 50%;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  font-size: 1.5rem;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.modalForm .formGroup {
+  display: flex;
+  align-items: center;
+}
+.modalContainer .footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalButtons button {
+  
+  width: 150px;
+  height: 45px;
+  margin: 30px 20px 0px 20px;
+  // border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modalButtons .red-button {
+  background-color: crimson;
+}
+.sorting-label {
+  margin-right: 8px;
+}
