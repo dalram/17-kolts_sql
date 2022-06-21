@@ -81,7 +81,21 @@ WHERE id = ?
   });
 });
 
-
+//EDIT
+// UPDATE table_name
+// SET column1 = value1, column2 = value2, ...
+// WHERE condition;
+app.put("/riedziai/:riedziaiId", (req, res) => {
+  const sql = `
+  UPDATE kolts
+  SET isBusy = ?, lastUseTime = ?, totalRideKilometres = ?
+  WHERE id = ?
+`;
+  con1.query(sql, [req.body.isBusy, req.body.lastUseTime, req.body.totalRideKilometres, req.params.riedziaiId], (err, result) => {
+      if (err) throw err;
+      res.send(result);
+  });
+});
 
 
 

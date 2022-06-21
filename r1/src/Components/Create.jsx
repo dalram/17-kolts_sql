@@ -11,10 +11,11 @@ function Create() {
     const obj = {
       regCode,
       isBusy: 0,
-      lastUseTime: "-",
+      lastUseTime: new Date(),
       totalRideKilometres: 0,
     };
     setCreateData(obj);
+    console.log(obj.lastUseTime)
     setRegCode(getRegCode());
   };
   return (

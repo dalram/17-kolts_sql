@@ -27,8 +27,15 @@ function App() {
 
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
-      setScooters(res.data);
-    });
+      // setScooters(res.data);
+      setScooters(res.data.map((kolt) => ({
+        ...kolt,
+        lastUseTime: new Date(kolt.lastUseTime),
+      })))
+      console.log(res.data);
+    }
+    
+    );
   }, [lastUpdate]);
   // sukuriam data masyva localeStorage spausdami Add Scooter button
   // useEffect(() => {
@@ -38,7 +45,6 @@ function App() {
   //   create(createData);
   //   setLastUpdate(Date.now());
   // }, [createData]);
-
   useEffect(() => {
     if (null === createData) return;
     axios.post("http://localhost:3003/riedziai", createData).then((res) => {
@@ -68,12 +74,23 @@ function App() {
     if (editData === null) {
       return;
     }
+    axios.put('http://localhost:3003/riedziai/' + editData.id, editData).then(res => {
+      // showMessage(res.data.msg);
+      setLastUpdate(Date.now());
+      console.log('hoho');
+    });
   }, [editData]);
 
   return (
     <ScootersContext.Provider
       value={{
         setCreateData,
+        setEditData, 
+        modalData, 
+        setModalData,
+        scooters, 
+        setDeleteData, 
+        sortType
       }}
     >
       <div className="App">

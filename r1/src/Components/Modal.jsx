@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { useEffect, useState } from "react";
+import ScootersContext from "../Contexts/ScootersContext";
 
-function Modal({ setEditData, modalData, setModalData }) {
+function Modal() {
   const [isBusy, setIsBusy] = useState(0);
   const [lastUseTime, setLastUseTime] = useState("");
   const [distance, setDistance] = useState(0);
-
+  const { setEditData, modalData, setModalData } = useContext(ScootersContext);
   const handleEdit = () => {
     const data = {
       id: modalData.id,
