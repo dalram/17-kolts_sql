@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import ScootersContext from "../Contexts/ScootersContext";
 import { scootersSort } from "../Functions/localStorage";
 
-function Sorting({ setSortType, sortType }) {
+function Sorting() {
+  const { setSortType, sortType } = useContext(ScootersContext);
   return (
     <>
       <div className="sorting-container">

@@ -1,4 +1,8 @@
-function ScootersData({ scooters }) {
+import { useContext } from "react";
+import ScootersContext from "../Contexts/ScootersContext";
+
+function ScootersData() {
+  const {scooters} = useContext(ScootersContext)
   return (
     <>
       <div>

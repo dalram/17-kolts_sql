@@ -28,15 +28,15 @@ function App() {
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
       // setScooters(res.data);
-      setScooters(res.data
-        .map((kolt, i) => ({
-        ...kolt,
-        lastUseTime: kolt.lastUseTime.length === 0 ? 'Not Used' : kolt.lastUseTime}))
-        )
-    }
-    
-    );
-    
+      setScooters(
+        res.data.map((kolt, i) => ({
+          ...kolt,
+          lastUseTime:
+            kolt.lastUseTime.length === 0 ? "Not Used" : kolt.lastUseTime,
+        }))
+        
+      );
+    });
   }, [lastUpdate]);
   // sukuriam data masyva localeStorage spausdami Add Scooter button
   // useEffect(() => {
@@ -63,8 +63,9 @@ function App() {
 
   useEffect(() => {
     if (null === deleteData) return;
-    axios.delete('http://localhost:3003/riedziai/' + deleteData.id)
-      .then(res => {
+    axios
+      .delete("http://localhost:3003/riedziai/" + deleteData.id)
+      .then((res) => {
         // showMessage(res.data.msg);
         setLastUpdate(Date.now());
       });
@@ -75,51 +76,40 @@ function App() {
     if (editData === null) {
       return;
     }
-    axios.put('http://localhost:3003/riedziai/' + editData.id, editData).then(res => {
-      // showMessage(res.data.msg);
-      setLastUpdate(Date.now());
-    });
+    axios
+      .put("http://localhost:3003/riedziai/" + editData.id, editData)
+      .then((res) => {
+        // showMessage(res.data.msg);
+        setLastUpdate(Date.now());
+      });
   }, [editData]);
 
   return (
     <ScootersContext.Provider
       value={{
         setCreateData,
-        setEditData, 
-        modalData, 
+        setEditData,
+        modalData,
         setModalData,
-        scooters, 
-        setDeleteData, 
-        sortType
+        scooters,
+        setDeleteData,
+        sortType,
+        setSortType
       }}
     >
       <div className="App">
         <h1>Kolt scooters administration app</h1>
         <div className="container">
           <div className="create-box">
-            <div className="create-header">
-              <h2>Create new scooter</h2>
-            </div>
+            <div className="create-header"></div>
             <Create></Create>
-            <ScootersData scooters={scooters} />
-            <Sorting sortType={sortType} setSortType={setSortType}></Sorting>
+            <ScootersData/>
+            <Sorting></Sorting>
           </div>
-
-          <div className="list-box">
-            <List
-              scooters={scooters}
-              setDeleteData={setDeleteData}
-              setModalData={setModalData}
-              sortType={sortType}
-            ></List>
-          </div>
+            <List></List>
         </div>
         {/* Modal langas turi buti atvaizduojamas paspaudus 'Redaguoti' ant paspirtuko. */}
-        <Modal
-          setEditData={setEditData}
-          modalData={modalData}
-          setModalData={setModalData}
-        ></Modal>
+        <Modal></Modal>
       </div>
     </ScootersContext.Provider>
   );

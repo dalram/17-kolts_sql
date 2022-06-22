@@ -1,5 +1,8 @@
-function Item({ scooter, setDeleteData, setModalData }) {
-  
+import { useContext } from "react";
+import ScootersContext from "../Contexts/ScootersContext";
+
+function Item({scooter}) {
+  const {setDeleteData, setModalData} = useContext(ScootersContext);
   const handleDelete = () => {
     setDeleteData(scooter);
   };

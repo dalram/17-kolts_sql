@@ -138,6 +138,20 @@ $color: rgb(20, 212, 49);
   }
 
 }
+.addButton,
+.regCodeInput
+ {
+  width: 50%;
+  text-align: center;
+}
+.createForm {
+  margin-bottom: 10px;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 10px;
+  
+}
+
 .item,
 .item-info {
   display: flex;
