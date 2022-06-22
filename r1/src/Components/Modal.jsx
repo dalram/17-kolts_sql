@@ -4,14 +4,14 @@ import ScootersContext from "../Contexts/ScootersContext";
 
 function Modal() {
   const [isBusy, setIsBusy] = useState(0);
-  const [lastUseTime, setLastUseTime] = useState("");
+  const [lastUseTime, setLastUseTime] = useState('');
   const [distance, setDistance] = useState(0);
   const { setEditData, modalData, setModalData } = useContext(ScootersContext);
   const handleEdit = () => {
     const data = {
       id: modalData.id,
       regCode: modalData.regCode,
-      isBusy: isBusy ? "true" : false,
+      isBusy: isBusy ? 1 : 0,
       lastUseTime,
       totalRideKilometres: (+modalData.totalRideKilometres + +distance).toFixed(
         2
@@ -19,7 +19,7 @@ function Modal() {
     };
     setEditData(data);
     // setIsBusy(0);
-    setLastUseTime("");
+    // setLastUseTime('');
     setDistance(0);
     setModalData(null);
   };
@@ -28,7 +28,7 @@ function Modal() {
       return;
     }
     setIsBusy(modalData.isBusy);
-    setLastUseTime(modalData.lastUseTime);
+    setLastUseTime('');
     setDistance("");
   }, [modalData]);
   if (null === modalData) {
@@ -66,7 +66,7 @@ function Modal() {
               <div className="formGroup">
                 <small>Last time used</small>
                 <input
-                  type="datetime-local"
+                  type="date"
                   value={modalData.lastUseTime}
                   onChange={(e) => modalData.lastUseTime}
                 />
@@ -74,7 +74,7 @@ function Modal() {
               <div className="formGroup">
                 <small>Update last used time</small>
                 <input
-                  type="datetime-local"
+                  type="date"
                   value={lastUseTime}
                   onChange={(e) => setLastUseTime(e.target.value)}
                 />

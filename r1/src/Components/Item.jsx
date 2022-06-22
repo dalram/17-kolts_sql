@@ -7,6 +7,7 @@ function Item({ scooter, setDeleteData, setModalData }) {
   const handleEdit = () => {
     setModalData(scooter);
   };
+  // console.log(scooter.lastUseTime.toString());
   return (
     <>
       <li>
@@ -14,7 +15,7 @@ function Item({ scooter, setDeleteData, setModalData }) {
           <div className="item-info">
             <p>Reg code: {scooter.regCode}</p>
             <p>Is busy: {scooter.isBusy ? "Busy!" : "Free!"}</p>
-            <p>Last use date: {scooter.lastUseTime.toLocaleString("lt-LT",)}</p>
+            <p>Last use date: {scooter.lastUseTime}</p>
             <p>Total ride distance in km: {scooter.totalRideKilometres}</p>
           </div>
           <div className="item-buttons">

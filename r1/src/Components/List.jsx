@@ -45,7 +45,11 @@ function List({ scooters, setDeleteData, setModalData, sortType }) {
               ? scooters === null
                 ? null
                 : [...scooters]
-                    .sort((a, b) => a.lastTimeUsed.localeCompare(b.lastTimeUsed))
+                    .sort((a, b) => {
+                      if (a.lastUseTime > b.lastUseTime) return 1;
+                      if (a.lastUseTime < b.lastUseTime) return -1;
+                      return 0;
+                    })
                     .map((scooter) => (
                       <Item
                         scooter={scooter}
@@ -55,6 +59,7 @@ function List({ scooters, setDeleteData, setModalData, sortType }) {
                       ></Item>
                     ))
               : null}
+              
           </ul>
         </div>
       </div>

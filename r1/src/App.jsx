@@ -28,14 +28,15 @@ function App() {
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
       // setScooters(res.data);
-      setScooters(res.data.map((kolt) => ({
+      setScooters(res.data
+        .map((kolt, i) => ({
         ...kolt,
-        lastUseTime: new Date(kolt.lastUseTime),
-      })))
-      console.log(res.data);
+        lastUseTime: kolt.lastUseTime.length === 0 ? 'Not Used' : kolt.lastUseTime}))
+        )
     }
     
     );
+    
   }, [lastUpdate]);
   // sukuriam data masyva localeStorage spausdami Add Scooter button
   // useEffect(() => {
@@ -77,7 +78,6 @@ function App() {
     axios.put('http://localhost:3003/riedziai/' + editData.id, editData).then(res => {
       // showMessage(res.data.msg);
       setLastUpdate(Date.now());
-      console.log('hoho');
     });
   }, [editData]);
 
