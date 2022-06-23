@@ -7,6 +7,10 @@ function Sorting() {
   return (
     <>
       <div className="sorting-container">
+      <div className="sort-header">
+        <h2>Sorting Area</h2>
+      </div>
+      <div className="sort-item">
         <label className="sorting-label">Sort scooters by</label>
         <select
           className="sorting-form"
@@ -20,6 +24,7 @@ function Sorting() {
           <option value="2">Distance traveled</option>
           <option value="3">Used date</option>
         </select>
+        </div>
       </div>
     </>
   );

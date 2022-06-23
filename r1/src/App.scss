@@ -1,17 +1,16 @@
 body {
   // background-image: url('https://image.shutterstock.com/image-photo/electric-scooter-on-white-concrete-260nw-1134117977.jpg');
-  background: url('https://i.pinimg.com/originals/07/00/e6/0700e64e50192aaee61f648e26f0699f.jpg') no-repeat center center fixed; 
+  background: url("https://i.pinimg.com/originals/07/00/e6/0700e64e50192aaee61f648e26f0699f.jpg")
+    no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 .App {
-  
   text-align: center;
   /* display: flex; */
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-  
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 .App-logo {
@@ -57,7 +56,7 @@ body {
 }
 .create-form {
   display: flex;
-  
+
   flex-direction: column;
 }
 .list-box {
@@ -79,7 +78,6 @@ body {
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
-  
 }
 button,
 input {
@@ -95,20 +93,20 @@ input {
 $color: rgb(20, 212, 49);
 .btn {
   display: inline-block;
-  padding: .3rem 0.7rem;
+  padding: 0.3rem 0.7rem;
   margin: 5px;
   border-radius: 10rem;
   color: #fff;
   text-transform: uppercase;
-  font-size: .6rem;
-  letter-spacing: .15rem;
-  transition: all .3s;
+  font-size: 0.6rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
   position: relative;
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -119,14 +117,14 @@ $color: rgb(20, 212, 49);
     z-index: -2;
   }
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0%;
     height: 100%;
     background-color: darken($color, 15%);
-    transition: all .3s;
+    transition: all 0.3s;
     border-radius: 10rem;
     z-index: -1;
   }
@@ -136,11 +134,9 @@ $color: rgb(20, 212, 49);
       width: 100%;
     }
   }
-
 }
 .addButton,
-.regCodeInput
- {
+.regCodeInput {
   width: 50%;
   text-align: center;
 }
@@ -149,7 +145,6 @@ $color: rgb(20, 212, 49);
   border: solid 2px black;
   border-radius: 5px;
   padding: 10px;
-  
 }
 
 .item,
@@ -160,17 +155,25 @@ $color: rgb(20, 212, 49);
   gap: 10px;
   flex-wrap: wrap;
 }
+.item-body {
+  display: flex;
+  justify-content: space-around;
+}
+.data-header {
+  text-align: left;
+  margin-left: 15px;
+}
 $colorred: crimson;
 .red-button {
   background-color: crimson;
 
-&:after{
-  background-color: $colorred;
+  &:after {
+    background-color: $colorred;
+  }
+  &:before {
+    background-color: darken($colorred, 15%);
+  }
 }
-&:before {
-  background-color: darken($colorred, 15%);
-}
-} 
 
 // Modal styling
 
@@ -240,7 +243,6 @@ $colorred: crimson;
 }
 
 .modalButtons button {
-  
   width: 150px;
   height: 45px;
   margin: 30px 20px 0px 20px;
@@ -253,6 +255,16 @@ $colorred: crimson;
 }
 .modalButtons .red-button {
   background-color: crimson;
+}
+
+.sorting-container {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.sort-item {
+  margin-top: 30px;
 }
 .sorting-label {
   margin-right: 8px;

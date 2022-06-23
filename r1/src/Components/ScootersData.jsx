@@ -2,11 +2,11 @@ import { useContext } from "react";
 import ScootersContext from "../Contexts/ScootersContext";
 
 function ScootersData() {
-  const {scooters} = useContext(ScootersContext)
+  const { scooters } = useContext(ScootersContext);
   return (
     <>
       <div>
-        <h2>Basic scooters data</h2>
+        <h2 className="data-header">Basic scooters data</h2>
         <ul>
           <li>
             <div className="item">

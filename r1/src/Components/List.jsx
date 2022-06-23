@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import ScootersContext from "../Contexts/ScootersContext";
 import Item from "./Item";
+import ScootersData from "./ScootersData";
+import Sorting from "./Sorting";
 // import ScootersData from "./ScootersData";
 
 function List() {
@@ -10,6 +12,10 @@ function List() {
     <>
       <div className="list-box">
         <div className="items">
+          <div className="item-body">
+            <ScootersData />
+            <Sorting />
+          </div>
           {/* <ScootersData scooters={scooters}></ScootersData> */}
           <div className="list-header">
             <h2>Scooters List</h2>

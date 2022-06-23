@@ -18,13 +18,7 @@ function App() {
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
   const [sortType, setSortType] = useState("1");
-  // useEffect(() => {
-  //   // scootersSort(localStorage.getItem('scooters-sort'));
-  //   localStorage.getItem("scooters-sort")
-  //     ? setSortType(localStorage.getItem("scooters-sort"))
-  //     : setSortType("1");
-  // }, []);
-
+  // Read
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
       // setScooters(res.data);
@@ -34,18 +28,10 @@ function App() {
           lastUseTime:
             kolt.lastUseTime.length === 0 ? "Not Used" : kolt.lastUseTime,
         }))
-        
       );
     });
   }, [lastUpdate]);
-  // sukuriam data masyva localeStorage spausdami Add Scooter button
-  // useEffect(() => {
-  //   if (null === createData) {
-  //     return;
-  //   }
-  //   create(createData);
-  //   setLastUpdate(Date.now());
-  // }, [createData]);
+  // Create
   useEffect(() => {
     if (null === createData) return;
     axios.post("http://localhost:3003/riedziai", createData).then((res) => {
@@ -53,11 +39,6 @@ function App() {
       setLastUpdate(Date.now());
     });
   }, [createData]);
-
-  // perduodam localStorage masyva su funkcija read naudodami UseEffect i setScooters kurios pagalba veliau ismapinam si masyva i Scooters List`a. Cia yra Read use effectas.
-  // useEffect(() => {
-  //   setScooters(read());
-  // }, [lastUpdate]);
 
   //  delete useEffect
 
@@ -94,19 +75,16 @@ function App() {
         scooters,
         setDeleteData,
         sortType,
-        setSortType
+        setSortType,
       }}
     >
       <div className="App">
         <h1>Kolt scooters administration app</h1>
         <div className="container">
           <div className="create-box">
-            <div className="create-header"></div>
             <Create></Create>
-            <ScootersData/>
-            <Sorting></Sorting>
           </div>
-            <List></List>
+          <List></List>
         </div>
         {/* Modal langas turi buti atvaizduojamas paspaudus 'Redaguoti' ant paspirtuko. */}
         <Modal></Modal>

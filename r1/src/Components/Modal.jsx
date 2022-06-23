@@ -4,7 +4,7 @@ import ScootersContext from "../Contexts/ScootersContext";
 
 function Modal() {
   const [isBusy, setIsBusy] = useState(0);
-  const [lastUseTime, setLastUseTime] = useState('');
+  const [lastUseTime, setLastUseTime] = useState("");
   const [distance, setDistance] = useState(0);
   const { setEditData, modalData, setModalData } = useContext(ScootersContext);
   const handleEdit = () => {
@@ -28,7 +28,7 @@ function Modal() {
       return;
     }
     setIsBusy(modalData.isBusy);
-    setLastUseTime('');
+    setLastUseTime("");
     setDistance("");
   }, [modalData]);
   if (null === modalData) {
