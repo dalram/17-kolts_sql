@@ -1,10 +1,11 @@
 import { useContext } from "react";
+import ColorContext from "../../Contexts/ColorContext";
 
 
 function Item({ color }) {
-  // const { setDeleteData} = useContext(ScootersContext);
+ const { setDeleteDataColors } = useContext(ColorContext);
   const handleDelete = () => {
-    // setDeleteData(scooter); // color
+    setDeleteDataColors(color);
   };
   return (
     <>

@@ -23,8 +23,8 @@ function App() {
 
   // Colors
   const [colors, setColors] = useState(null);
-  const [createDataGoods, setCreateDataGoods] = useState(null);
-
+  const [createDataColors, setCreateDataColors] = useState(null);
+  const [deleteDataColors, setDeleteDataColors] = useState(null);
 // Scooters UseEffects
   // Read
   useEffect(() => {
@@ -88,12 +88,21 @@ function App() {
   // Create
 
   useEffect(() => {
-    if (null === createDataGoods) return;
-    axios.post("http://localhost:3003/spalvos", createDataGoods).then((res) => {
+    if (null === createDataColors) return;
+    axios.post("http://localhost:3003/spalvos", createDataColors).then((res) => {
       // showMessage(res.data.msg);
       setLastUpdate(Date.now());
     });
-  }, [createDataGoods]);
+  }, [createDataColors]);
+
+// Delete
+  useEffect(() => {
+    if (null === deleteDataColors) return;
+    axios.delete('http://localhost:3003/spalvos/' + deleteDataColors.id)
+      .then(res => {
+        setLastUpdate(Date.now());
+      });
+  }, [deleteDataColors]);
 
   return (
     <ScootersContext.Provider
@@ -110,7 +119,8 @@ function App() {
     >
       <ColorContext.Provider value={{
         colors,
-        setCreateDataGoods,
+        setCreateDataColors,
+        setDeleteDataColors,
       }}>
         <div className="App">
           <h1>Kolt scooters administration app</h1>

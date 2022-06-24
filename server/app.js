@@ -133,6 +133,19 @@ VALUES (?)
   );
 });
 
+// Delete COLOR
+
+app.delete("/spalvos/:spalvosId", (req, res) => {
+  const sql = `
+DELETE FROM spalva
+WHERE id = ?
+`;
+  con.query(sql, [req.params.spalvosId], (err, result) => {
+      if (err) throw err;
+      res.send(result);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr ${port}`);
 });
