@@ -97,7 +97,41 @@ app.put("/riedziai/:riedziaiId", (req, res) => {
   });
 });
 
+// COLORS
+// READ COLORS
 
+app.get("/spalvos", (req, res) => {
+  const sql = `
+    SELECT
+    *
+    FROM spalva
+    ORDER BY title ASC
+  `;
+  con1.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// Create COLOR
+
+app.post("/spalvos", (req, res) => {
+  const sql = `
+INSERT INTO spalva
+(title)
+VALUES (?)
+`;
+  con1.query(
+    sql,
+    [
+      req.body.title
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
 
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr ${port}`);

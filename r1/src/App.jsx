@@ -3,14 +3,16 @@ import "./App.scss";
 import Create from "./Components/Create";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
-import ScootersData from "./Components/ScootersData";
-import Sorting from "./Components/Sorting";
 // import getRegCode from './Functions/getRegCode';
-// import {edit, read, remove } from "./Functions/localStorage";
 import axios from "axios";
 import ScootersContext from "./Contexts/ScootersContext";
+import ColorContext from "./Contexts/ColorContext";
+import ColorList from './Components/Colors/ColorList'
+import ColorCreate from './Components/Colors/ColorCreate'
 
 function App() {
+  // Scooters
+
   const [createData, setCreateData] = useState(null);
   const [scooters, setScooters] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
@@ -18,6 +20,12 @@ function App() {
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
   const [sortType, setSortType] = useState("1");
+
+  // Colors
+  const [colors, setColors] = useState(null);
+  const [createDataGoods, setCreateDataGoods] = useState(null);
+
+// Scooters UseEffects
   // Read
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
@@ -65,6 +73,28 @@ function App() {
       });
   }, [editData]);
 
+
+  // Colors useEffects
+
+  // Read 
+
+  useEffect(() => {
+    axios.get("http://localhost:3003/spalvos").then((res) => {
+      setColors(res.data);
+    });
+  }, [lastUpdate]);
+
+
+  // Create
+
+  useEffect(() => {
+    if (null === createDataGoods) return;
+    axios.post("http://localhost:3003/spalvos", createDataGoods).then((res) => {
+      // showMessage(res.data.msg);
+      setLastUpdate(Date.now());
+    });
+  }, [createDataGoods]);
+
   return (
     <ScootersContext.Provider
       value={{
@@ -78,17 +108,24 @@ function App() {
         setSortType,
       }}
     >
-      <div className="App">
-        <h1>Kolt scooters administration app</h1>
-        <div className="container">
-          <div className="create-box">
-            <Create></Create>
+      <ColorContext.Provider value={{
+        colors,
+        setCreateDataGoods,
+      }}>
+        <div className="App">
+          <h1>Kolt scooters administration app</h1>
+          <div className="container">
+            <div className="create-box">
+              <Create></Create>
+              <ColorCreate></ColorCreate>
+              <ColorList></ColorList>
+            </div>
+            <List></List>
           </div>
-          <List></List>
+          {/* Modal langas turi buti atvaizduojamas paspaudus 'Redaguoti' ant paspirtuko. */}
+          <Modal></Modal>
         </div>
-        {/* Modal langas turi buti atvaizduojamas paspaudus 'Redaguoti' ant paspirtuko. */}
-        <Modal></Modal>
-      </div>
+      </ColorContext.Provider>
     </ScootersContext.Provider>
   );
 }
