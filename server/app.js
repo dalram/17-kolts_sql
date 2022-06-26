@@ -35,9 +35,17 @@ const con1 = mysql.createConnection({
 app.get("/riedziai", (req, res) => {
   const sql = `
     SELECT
-    *
-    FROM kolts
+    k.regCode, c.title AS color, isBusy, lastUseTime,  totalRideKilometres, k.id
+    FROM kolts AS k
+    LEFT JOIN spalva AS c
+    ON k.color_id = c.id
   `;
+//   `SELECT
+//   t.title, g.title AS good, height, type, t.id
+//   FROM trees AS t
+//   LEFT JOIN goods AS g
+//   ON t.good_id = g.id
+// `;
   con1.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -50,8 +58,8 @@ app.get("/riedziai", (req, res) => {
 app.post("/riedziai", (req, res) => {
   const sql = `
 INSERT INTO kolts
-(regCode, isBusy, lastUseTime, totalRideKilometres)
-VALUES (?, ?, ?, ?)
+(regCode, isBusy, lastUseTime, totalRideKilometres, color_id)
+VALUES (?, ?, ?, ?, ?)
 `;
   con1.query(
     sql,
@@ -60,6 +68,7 @@ VALUES (?, ?, ?, ?)
       req.body.isBusy,
       req.body.lastUseTime,
       req.body.totalRideKilometres,
+      req.body.color
     ],
     (err, result) => {
       if (err) throw err;
@@ -88,10 +97,10 @@ WHERE id = ?
 app.put("/riedziai/:riedziaiId", (req, res) => {
   const sql = `
   UPDATE kolts
-  SET isBusy = ?, lastUseTime = ?, totalRideKilometres = ?
+  SET isBusy = ?, lastUseTime = ?, totalRideKilometres = ?, color_id = ?
   WHERE id = ?
 `;
-  con1.query(sql, [req.body.isBusy, req.body.lastUseTime, req.body.totalRideKilometres, req.params.riedziaiId], (err, result) => {
+  con1.query(sql, [req.body.isBusy, req.body.lastUseTime, req.body.totalRideKilometres, req.body.color, req.params.riedziaiId], (err, result) => {
       if (err) throw err;
       res.send(result);
   });

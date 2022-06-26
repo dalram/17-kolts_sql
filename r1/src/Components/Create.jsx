@@ -8,19 +8,22 @@ function Create() {
   const [lastUseTime, setLastUseTime] = useState("");
   const [distance, setDistance] = useState(0);
   const [regCode, setRegCode] = useState(getRegCode());
-  const { setCreateData } = useContext(ScootersContext);
+  const { setCreateData, colors } = useContext(ScootersContext);
+  const [color, setColor] = useState(0);
   const addScooter = () => {
     const obj = {
       regCode,
       isBusy: isBusy,
       lastUseTime: lastUseTime,
       totalRideKilometres: distance,
+      color: color,
     };
     setCreateData(obj);
     setIsBusy(0);
     setLastUseTime("");
     setRegCode(getRegCode());
     setDistance(0);
+    setColor(0);
   };
   return (
     <>
@@ -41,6 +44,21 @@ function Create() {
               checked={isBusy ? 1 : 0}
               onChange={(e) => setIsBusy(isBusy ? 0 : 1)}
             />
+          </div>
+          <div className="formGroup">
+            <label>Scooter color</label>
+            <select
+          className="create-color"
+          onChange={(e) => {
+            setColor(e.target.value)
+          }}
+          value={color}
+        >
+          <option value="0" disabled>Select Color</option>
+          {
+            colors ? colors.map(color => <option key={color.id} value={color.id}>{color.title}</option>) : null
+          }
+        </select>
           </div>
           <div className="formGroup">
             <span>Update last used time</span>

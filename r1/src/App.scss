@@ -59,6 +59,9 @@ body {
 
   flex-direction: column;
 }
+.formGroup {
+  margin-bottom: 10px;
+}
 .list-box {
   display: flex;
   flex-grow: 2;
@@ -271,4 +274,10 @@ $colorred: crimson;
 }
 .color-small {
   display: inline-flex;
+}
+label {
+  margin-right: 15px;
+}
+select {
+  margin-left: 15px;
 }

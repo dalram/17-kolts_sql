@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     axios.get("http://localhost:3003/riedziai").then((res) => {
       // setScooters(res.data);
+      // console.log(res.data);
       setScooters(
         res.data.map((kolt, i) => ({
           ...kolt,
@@ -115,6 +116,7 @@ function App() {
         setDeleteData,
         sortType,
         setSortType,
+        colors
       }}
     >
       <ColorContext.Provider value={{

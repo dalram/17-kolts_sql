@@ -6,7 +6,9 @@ function Modal() {
   const [isBusy, setIsBusy] = useState(0);
   const [lastUseTime, setLastUseTime] = useState("");
   const [distance, setDistance] = useState(0);
-  const { setEditData, modalData, setModalData } = useContext(ScootersContext);
+  const [color, setColor] = useState(0);
+  const { setEditData, modalData, setModalData, colors } = useContext(ScootersContext);
+  
   const handleEdit = () => {
     const data = {
       id: modalData.id,
@@ -16,6 +18,7 @@ function Modal() {
       totalRideKilometres: (+modalData.totalRideKilometres + +distance).toFixed(
         2
       ),
+      color,
     };
     setEditData(data);
     // setIsBusy(0);
@@ -27,9 +30,11 @@ function Modal() {
     if (null === modalData) {
       return;
     }
+    console.log(modalData);
     setIsBusy(modalData.isBusy);
     setLastUseTime("");
     setDistance("");
+    setColor(colors.filter(c => modalData.color === c.title)[0]?.id ?? 0)
   }, [modalData]);
   if (null === modalData) {
     return null;
@@ -63,6 +68,21 @@ function Modal() {
                   onChange={(e) => setIsBusy(isBusy ? 0 : 1)}
                 />
               </div>
+              <div className="formGroup">
+            <small>Scooter color</small>
+            <select
+          className="create-color"
+          onChange={(e) => {
+            setColor(e.target.value)
+          }}
+          value={color}
+        >
+          <option value="0" disabled>Select Color</option>
+          {
+            colors ? colors.map(color => <option key={color.id} value={color.id}>{color.title}</option>) : null
+          }
+        </select>
+          </div>
               <div className="formGroup">
                 <small>Last time used</small>
                 <input

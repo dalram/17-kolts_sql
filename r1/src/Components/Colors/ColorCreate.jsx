@@ -34,3 +34,5 @@ function ColorCreate() {
 }
 
 export default ColorCreate;
+
+// Duomenu baziu sujungimas, atspausdinimas spalvos prie paspirtuko, Editinimas spalvos paspirtuko modale, create scooter formoje irgi ideti su selectu esamu spalvu pasirinkima. Prie spalvu atspausdinti kiek tokios spalvos paspirtuku yra, leisti istrinti tik tada, kada tos spalvos paspirtuku nera!!!
