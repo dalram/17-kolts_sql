@@ -73,3 +73,5 @@ function List() {
   );
 }
 export default List;
+
+//  kaip daryti su sortinimu, ar geriau po pirmo uzkrovimo visus duomenis sortinti paciame reacte, ar geriau pasidaryti uzkrovimus su sortintais duomenimis is duomenu bazes serverio????

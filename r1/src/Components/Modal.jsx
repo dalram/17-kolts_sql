@@ -7,14 +7,15 @@ function Modal() {
   const [lastUseTime, setLastUseTime] = useState("");
   const [distance, setDistance] = useState(0);
   const [color, setColor] = useState(0);
-  const { setEditData, modalData, setModalData, colors } = useContext(ScootersContext);
-  
+  const { setEditData, modalData, setModalData, colors } =
+    useContext(ScootersContext);
+
   const handleEdit = () => {
     const data = {
       id: modalData.id,
       regCode: modalData.regCode,
       isBusy: isBusy ? 1 : 0,
-      lastUseTime,
+      lastUseTime: lastUseTime ? lastUseTime : modalData.lastUseTime,
       totalRideKilometres: (+modalData.totalRideKilometres + +distance).toFixed(
         2
       ),
@@ -30,16 +31,16 @@ function Modal() {
     if (null === modalData) {
       return;
     }
-    console.log(modalData);
+    // console.log(modalData);
     setIsBusy(modalData.isBusy);
     setLastUseTime("");
     setDistance("");
-    setColor(colors.filter(c => modalData.color === c.title)[0]?.id ?? 0)
+    setColor(colors.filter((c) => modalData.color === c.title)[0]?.id ?? 0);
   }, [modalData]);
   if (null === modalData) {
     return null;
   }
-
+  // Pabaigiau su modalu, dabar reiks spausdinti spalvas prie paspirtuku ir prie spalvu kiek paspirtuku yra toks spalvos atspausdinti
   return (
     <>
       <div className="modalBackground">
@@ -69,20 +70,26 @@ function Modal() {
                 />
               </div>
               <div className="formGroup">
-            <small>Scooter color</small>
-            <select
-          className="create-color"
-          onChange={(e) => {
-            setColor(e.target.value)
-          }}
-          value={color}
-        >
-          <option value="0" disabled>Select Color</option>
-          {
-            colors ? colors.map(color => <option key={color.id} value={color.id}>{color.title}</option>) : null
-          }
-        </select>
-          </div>
+                <small>Scooter color</small>
+                <select
+                  className="create-color"
+                  onChange={(e) => {
+                    setColor(e.target.value);
+                  }}
+                  value={color}
+                >
+                  <option value="0" disabled>
+                    Select Color
+                  </option>
+                  {colors
+                    ? colors.map((color) => (
+                        <option key={color.id} value={color.id}>
+                          {color.title}
+                        </option>
+                      ))
+                    : null}
+                </select>
+              </div>
               <div className="formGroup">
                 <small>Last time used</small>
                 <input

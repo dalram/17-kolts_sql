@@ -29,7 +29,6 @@ const con1 = mysql.createConnection({
 });
 // Routes
 
-
 // Paspirtukai
 
 app.get("/riedziai", (req, res) => {
@@ -40,12 +39,6 @@ app.get("/riedziai", (req, res) => {
     LEFT JOIN spalva AS c
     ON k.color_id = c.id
   `;
-//   `SELECT
-//   t.title, g.title AS good, height, type, t.id
-//   FROM trees AS t
-//   LEFT JOIN goods AS g
-//   ON t.good_id = g.id
-// `;
   con1.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -68,11 +61,11 @@ VALUES (?, ?, ?, ?, ?)
       req.body.isBusy,
       req.body.lastUseTime,
       req.body.totalRideKilometres,
-      req.body.color
+      req.body.color ? req.body.color : null,
     ],
     (err, result) => {
       if (err) throw err;
-      res.send(result);
+      res.send({ result, msg: { text: "Success!", type: "success" } });
     }
   );
 });
@@ -85,8 +78,8 @@ DELETE FROM kolts
 WHERE id = ?
 `;
   con1.query(sql, [req.params.koltsId], (err, result) => {
-      if (err) throw err;
-      res.send(result);
+    if (err) throw err;
+    res.send(result);
   });
 });
 
@@ -100,10 +93,20 @@ app.put("/riedziai/:riedziaiId", (req, res) => {
   SET isBusy = ?, lastUseTime = ?, totalRideKilometres = ?, color_id = ?
   WHERE id = ?
 `;
-  con1.query(sql, [req.body.isBusy, req.body.lastUseTime, req.body.totalRideKilometres, req.body.color, req.params.riedziaiId], (err, result) => {
+  con1.query(
+    sql,
+    [
+      req.body.isBusy,
+      req.body.lastUseTime,
+      req.body.totalRideKilometres,
+      req.body.color,
+      req.params.riedziaiId,
+    ],
+    (err, result) => {
       if (err) throw err;
-      res.send(result);
-  });
+      res.send({ result, msg: { text: "Success!", type: "success" } });
+    }
+  );
 });
 
 // COLORS
@@ -112,10 +115,14 @@ app.put("/riedziai/:riedziaiId", (req, res) => {
 app.get("/spalvos", (req, res) => {
   const sql = `
     SELECT
-    *
-    FROM spalva
-    ORDER BY title ASC
+    c.title, c.id, COUNT(k.id) AS scooters_count
+    FROM kolts AS k
+    RIGHT JOIN spalva AS c
+    ON k.color_id = c.id
+    GROUP BY c.id
+    ORDER BY scooters_count
   `;
+
   con1.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -130,16 +137,10 @@ INSERT INTO spalva
 (title)
 VALUES (?)
 `;
-  con1.query(
-    sql,
-    [
-      req.body.title
-    ],
-    (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    }
-  );
+  con1.query(sql, [req.body.title], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: "Success!", type: "success" } });
+  });
 });
 
 // Delete COLOR
@@ -150,8 +151,8 @@ DELETE FROM spalva
 WHERE id = ?
 `;
   con.query(sql, [req.params.spalvosId], (err, result) => {
-      if (err) throw err;
-      res.send(result);
+    if (err) throw err;
+    res.send({ result, msg: { text: "Success!", type: "success" } });
   });
 });
 

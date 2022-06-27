@@ -17,6 +17,7 @@ function Item({ scooter }) {
         <div className="item">
           <div className="item-info">
             <p>Reg code: {scooter.regCode}</p>
+            <p style={{color: `${scooter.color}`}}>Color: {scooter.color ? scooter.color : null}</p>
             <p>Is busy: {scooter.isBusy ? "Busy!" : "Free!"}</p>
             <p>Last use date: {scooter.lastUseTime}</p>
             <p>Total ride distance in km: {scooter.totalRideKilometres}</p>

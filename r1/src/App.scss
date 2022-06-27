@@ -281,3 +281,24 @@ label {
 select {
   margin-left: 15px;
 }
+.show-message {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.message-success {
+  background-color: green;
+  padding: 5px 30px 5px 30px;
+  margin: 5px 30px 5px 30px;
+  border-radius: 5px;
+}
+.message-danger {
+  background-color: crimson;
+  padding: 5px 30px 5px 30px;
+  margin: 5px 30px 5px 30px;
+  border-radius: 5px;
+}

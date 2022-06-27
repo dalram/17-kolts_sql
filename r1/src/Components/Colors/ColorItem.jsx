@@ -13,9 +13,10 @@ function Item({ color }) {
         <div className="item">
           <div className="item-info">
             <p>{color.title}</p>
+            <i>({color.scooters_count})</i>
           </div>
           <div className="item-buttons">
-            <button className="btn red-button" onClick={handleDelete}>
+            <button className="btn red-button" style={{display: color.scooters_count ? 'none' : 'inline-block'}} onClick={handleDelete}>
               Delete
             </button>
           </div>
