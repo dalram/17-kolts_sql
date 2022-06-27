@@ -156,6 +156,44 @@ WHERE id = ?
   });
 });
 
+
+
+// FRONT-OFFICE
+
+app.get("/front/spalvos", (req, res) => {
+  const sql = `
+    SELECT
+    c.title, c.id, COUNT(k.id) AS scooters_count, GROUP_CONCAT(k.regCode) as scooters_regCode
+    FROM kolts AS k
+    RIGHT JOIN spalva AS c
+    ON k.color_id = c.id
+    GROUP BY c.id
+    ORDER BY scooters_count DESC
+  `;
+
+  con1.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// app.get("/front/gerybes", (req, res) => {
+//   const sql = `
+// SELECT
+// g.title, g.id, COUNT(t.id) AS trees_count, GROUP_CONCAT(t.title) as tree_titles
+// FROM trees AS t
+// RIGHT JOIN goods AS g
+// ON t.good_id = g.id
+// GROUP BY g.id
+// ORDER BY g.title
+// `;
+//   con.query(sql, (err, result) => {
+//       if (err) throw err;
+//       res.send(result);
+//   });
+// });
+
+
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr ${port}`);
 });

@@ -1,7 +1,7 @@
 body {
   // background-image: url('https://image.shutterstock.com/image-photo/electric-scooter-on-white-concrete-260nw-1134117977.jpg');
   background: url("https://i.pinimg.com/originals/07/00/e6/0700e64e50192aaee61f648e26f0699f.jpg")
-    no-repeat center center fixed;
+  no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,7 +9,7 @@ body {
 }
 .App {
   text-align: center;
-  /* display: flex; */
+  // display: flex;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -66,6 +66,11 @@ body {
   display: flex;
   flex-grow: 2;
   flex-direction: column;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .container {
   display: flex;
@@ -160,7 +165,8 @@ $color: rgb(20, 212, 49);
 }
 .item-body {
   display: flex;
-  justify-content: space-around;
+  width: 100%;
+  // justify-content: space-around;
 }
 .data-header {
   text-align: left;
@@ -177,6 +183,29 @@ $colorred: crimson;
     background-color: darken($colorred, 15%);
   }
 }
+.list-container {
+  display: flex;
+  justify-content: center;
+}
+.list-box-front {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+}
+.items-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.list-group-item {
+  padding: 15px;
+}
+
+
 
 // Modal styling
 
@@ -302,3 +331,4 @@ select {
   margin: 5px 30px 5px 30px;
   border-radius: 5px;
 }
+

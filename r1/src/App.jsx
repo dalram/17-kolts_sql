@@ -1,10 +1,18 @@
 import Back from './Back';
-
+import Front from './Front';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+  } from "react-router-dom";
 function App() {
   return (
-    <div>
-      <Back/>
-    </div>
+    <BrowserRouter>
+    <Routes>
+        <Route path='/' element={<Front/>}></Route>
+        <Route path='/admin' element={<Back/>}></Route>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
