@@ -166,7 +166,7 @@ $color: rgb(20, 212, 49);
 .item-body {
   display: flex;
   width: 100%;
-  // justify-content: space-around;
+  justify-content: space-around;
 }
 .data-header {
   text-align: left;
@@ -186,24 +186,78 @@ $colorred: crimson;
 .list-container {
   display: flex;
   justify-content: center;
+  flex-grow: 2;
+}
+.scooters-container {
+  flex-grow: 5;
 }
 .list-box-front {
   border: 2px solid black;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
+  height: 100%;
   align-items: center;
-  justify-content: center;
+  
+  margin-left: 20px;
 }
 .items-group {
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  list-style-type: none;
+  text-align: center;
+  padding-inline-start: 0px;
+  margin: 5px;
 }
 .list-group-item {
   padding: 15px;
+  border: 2px solid black;
+  align-items: center;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 5px;
+  
 }
+.flex-front {
+  display: flex;
+  flex-direction: row;
+}
+.list-header {
+  border-bottom: 2px solid black;
+  width: 100%;
+  text-align: center;
+}
+.item-colors {
+  border: 2px solid black;
+  margin: 10px;
+}
+.list-group {
+  padding-inline-start: 0px;
+  margin: 5px;
+}
+.item-scooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.item-comment {
+  display: flex;
+  flex-direction: column;
+  textarea {
+    width: 100%;
+  }
+}
+.item-front {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px
+}
+
+
 
 
 

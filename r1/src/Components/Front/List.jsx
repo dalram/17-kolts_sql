@@ -4,7 +4,6 @@ import Item from "./Item";
 
 function List() {
   const { colors } = useContext(FrontContext);
-  console.log(colors);
   return (
     <>
     <div className="list-container">

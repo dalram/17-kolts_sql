@@ -159,7 +159,7 @@ WHERE id = ?
 
 
 // FRONT-OFFICE
-
+// Gaunu data is serverio frontui
 app.get("/front/spalvos", (req, res) => {
   const sql = `
     SELECT
@@ -177,22 +177,36 @@ app.get("/front/spalvos", (req, res) => {
   });
 });
 
-// app.get("/front/gerybes", (req, res) => {
-//   const sql = `
-// SELECT
-// g.title, g.id, COUNT(t.id) AS trees_count, GROUP_CONCAT(t.title) as tree_titles
-// FROM trees AS t
-// RIGHT JOIN goods AS g
-// ON t.good_id = g.id
-// GROUP BY g.id
-// ORDER BY g.title
-// `;
-//   con.query(sql, (err, result) => {
-//       if (err) throw err;
-//       res.send(result);
-//   });
-// });
+app.get("/front/scooters", (req, res) => {
+  const sql = `
+    SELECT
+    k.regCode, c.title AS color, isBusy, lastUseTime,  totalRideKilometres, k.id, GROUP_CONCAT(com.com, '-^o^-') AS comments
+    FROM kolts AS k
+    LEFT JOIN spalva AS c
+    ON k.color_id = c.id
+    LEFT JOIN comments AS com
+    ON com.kolt_id = k.id
+    GROUP BY k.id
+  `;
+  con1.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
+// Create comment
+
+app.post("/front/comments", (req, res) => {
+  const sql = `
+INSERT INTO comments
+(com, kolt_id)
+VALUES (?, ?)
+`;
+  con1.query(sql, [req.body.comment, req.body.koltId], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: "Success!", type: "success" } });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr ${port}`);
