@@ -8,6 +8,8 @@ function Front() {
   const [scooters, setScooters] = useState(null);
   const [createComment, setCreateComment] = useState(null)
   const [lastUpdate, setLastUpdate] = useState(Date.now());
+  const [isBusy, setIsBusy] = useState(null);
+  const [message, setMessage] = useState(null);
   useEffect(() => {
     axios.get("http://localhost:3003/front/spalvos").then((res) => {
       // console.log(res.data);
@@ -16,7 +18,7 @@ function Front() {
   }, [lastUpdate]);
   useEffect(() => {
     axios.get("http://localhost:3003/front/scooters").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setScooters(res.data);
     });
   }, [lastUpdate]);
@@ -27,12 +29,34 @@ function Front() {
             setLastUpdate(Date.now());
           })
       }, [createComment]);
+
+
+      // book scooter
+
+      useEffect(() => {
+        if (isBusy === null) {
+          return;
+        }
+        axios
+          .put("http://localhost:3003/front/riedziai/" + isBusy.id, isBusy)
+          .then((res) => {
+            showMessage(res.data.msg ? res.data.msg : null);
+            setLastUpdate(Date.now());
+          })
+      }, [isBusy]);
+
+      const showMessage = (msg) => {
+        setMessage(msg);
+        setTimeout(() => setMessage(null), 5000);
+      };
   return (
     <FrontContext.Provider
       value={{
         colors,
         scooters,
-        setCreateComment
+        setCreateComment,
+        setIsBusy,
+        message
       }}
     >
       <div className="flex-front">

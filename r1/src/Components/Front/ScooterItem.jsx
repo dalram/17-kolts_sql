@@ -2,12 +2,20 @@ import { useContext } from "react";
 import { useState } from "react";
 import FrontContext from "../../Contexts/FrontContext";
 function ScooterItem({ scooter }) {
-  const { setCreateComment } = useContext(FrontContext);
+  const { setCreateComment, setIsBusy } = useContext(FrontContext);
   const [comment, setComment] = useState("");
+  const [notBusy, setNotBusy] = useState(0);
   const handleComment = () => {
     console.log(scooter);
     setCreateComment({ comment, koltId: scooter.id });
     setComment("");
+  };
+  const handleBooking = () => {
+    if (notBusy) {
+      setIsBusy({...scooter, isBusy: 1});
+    } else {
+      return;
+    }
   };
   return (
     <>
@@ -17,13 +25,25 @@ function ScooterItem({ scooter }) {
             <p>{scooter.regCode}</p>
             <i>({scooter.color})</i>
             {scooter.isBusy ? (
+              <p style={{ color: "crimson" }}>Scooter is booked!</p>
+            ) : (
               <p style={{ color: "green" }}>
                 Scooter is free, you can book it!
               </p>
-            ) : (
-              <p style={{ color: "crimson" }}>Scooter is booked!</p>
             )}
-          </div>
+          </div> {
+            scooter.isBusy ? null :
+            <div className="item-front">
+                <span>Check and click for booking!</span>
+                <input
+                  type="checkbox"
+                  checked={notBusy}
+                  onChange={(e) => setNotBusy(notBusy ? 0 : 1)}
+                />
+                <button className="btn orange-button" onClick={handleBooking}>Book scooter!</button>
+              </div>
+          }
+          
           <div className="item-comment">
             <label>Leave review about scooter</label>
             <textarea

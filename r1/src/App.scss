@@ -183,6 +183,17 @@ $colorred: crimson;
     background-color: darken($colorred, 15%);
   }
 }
+$colororange: orange;
+.orange-button {
+  background-color: orange;
+
+  &:after {
+    background-color: $colororange;
+  }
+  &:before {
+    background-color: darken($colororange, 15%);
+  }
+}
 .list-container {
   display: flex;
   justify-content: center;

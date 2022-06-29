@@ -223,6 +223,27 @@ WHERE id = ?
   });
 });
 
+// book scooter
+
+app.put("/front/riedziai/:scooterId", (req, res) => {
+  const sql = `
+  UPDATE kolts
+  SET isBusy = ?
+  WHERE id = ?
+`;
+  con1.query(
+    sql,
+    [
+      req.body.isBusy,
+      req.params.scooterId,
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: "Success!", type: "success" } });
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr ${port}`);
 });
