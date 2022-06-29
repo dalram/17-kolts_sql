@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ScootersContext from "../Contexts/ScootersContext";
 
 function Item({ scooter }) {
-  const { setDeleteData, setModalData } = useContext(ScootersContext);
+  const { setDeleteData, setModalData, setDeleteCom } = useContext(ScootersContext);
   const handleDelete = () => {
     setDeleteData(scooter);
   };
@@ -10,14 +10,20 @@ function Item({ scooter }) {
   const handleEdit = () => {
     setModalData(scooter);
   };
-  // console.log(scooter.lastUseTime.toString());
+
+  const handleComment = (i) => {
+    setDeleteCom(scooter.coms_id.split(',')[i]);
+  };
+ 
   return (
     <>
       <li>
         <div className="item">
           <div className="item-info">
             <p>Reg code: {scooter.regCode}</p>
-            <p style={{color: `${scooter.color}`}}>Color: {scooter.color ? scooter.color : null}</p>
+            <p style={{ color: `${scooter.color}` }}>
+              Color: {scooter.color ? scooter.color : null}
+            </p>
             <p>Is busy: {scooter.isBusy ? "Busy!" : "Free!"}</p>
             <p>Last use date: {scooter.lastUseTime}</p>
             <p>Total ride distance in km: {scooter.totalRideKilometres}</p>
@@ -31,6 +37,19 @@ function Item({ scooter }) {
             </button>
           </div>
         </div>
+        <div className="back-comments">
+          <h3>Comments about scooter</h3>
+            <ul className="back-comments-list">
+              {scooter.comments
+                ? scooter.comments
+                    .slice(0, -5)
+                    .split("-^o^-,")
+                    .map((com, i) => <li key={i} className="back-comment"><p>{com}</p> <button className="btn red-button" onClick={() => handleComment(i)}>
+                    Delete comment
+                  </button></li>)
+                : null}
+            </ul>
+          </div>
       </li>
     </>
   );

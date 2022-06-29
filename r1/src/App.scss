@@ -242,12 +242,20 @@ $colorred: crimson;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  .comments{
+    max-width: 600px;
+    display: flex;
+    text-align: start;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+  }
 }
 .item-comment {
   display: flex;
   flex-direction: column;
   textarea {
-    width: 100%;
+    width: 300px;
+    height: 100px;
   }
 }
 .item-front {
@@ -255,6 +263,22 @@ $colorred: crimson;
     justify-content: center;
     align-items: center;
     gap: 20px
+}
+.back-comments {
+  display: inline-block;
+  flex-direction: column;
+  max-width: 500px;
+  justify-content: center;
+  align-items: center;
+  .back-comments-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    .back-comment {
+      text-align: start;
+    }
+  }
 }
 
 

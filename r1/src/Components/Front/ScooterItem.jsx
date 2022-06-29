@@ -3,12 +3,12 @@ import { useState } from "react";
 import FrontContext from "../../Contexts/FrontContext";
 function ScooterItem({ scooter }) {
   const { setCreateComment } = useContext(FrontContext);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const handleComment = () => {
     console.log(scooter);
-    setCreateComment({comment, koltId: scooter.id});
-    setComment('');
-  }
+    setCreateComment({ comment, koltId: scooter.id });
+    setComment("");
+  };
   return (
     <>
       <li>
@@ -35,6 +35,16 @@ function ScooterItem({ scooter }) {
             <button className="btn" onClick={handleComment}>
               Add comment
             </button>
+          </div>
+          <div className="comments">
+            <ul>
+              {scooter.comments
+                ? scooter.comments
+                    .slice(0, -5)
+                    .split("-^o^-,")
+                    .map((com, i) => <li key={i}>{com}</li>)
+                : null}
+            </ul>
           </div>
         </div>
       </li>

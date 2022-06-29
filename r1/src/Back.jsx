@@ -27,6 +27,10 @@ function App() {
   const [colors, setColors] = useState(null);
   const [createDataColors, setCreateDataColors] = useState(null);
   const [deleteDataColors, setDeleteDataColors] = useState(null);
+  // delete comment
+  const [deleteCom, setDeleteCom] = useState(null);
+
+
   // Scooters UseEffects
   // Read
   useEffect(() => {
@@ -123,6 +127,18 @@ function App() {
     setTimeout(() => setMessage(null), 5000);
   };
 
+  // delete Comment
+  useEffect(() => {
+    if (null === deleteCom) return;
+    axios
+      .delete("http://localhost:3003/comments/" + deleteCom)
+      .then((res) => {
+        showMessage(res.data.msg);
+        setLastUpdate(Date.now());
+      })
+  }, [deleteCom]);
+  
+
   return (
     <ScootersContext.Provider
       value={{
@@ -136,6 +152,7 @@ function App() {
         setSortType,
         colors,
         message,
+        setDeleteCom
       }}
     >
       <ColorContext.Provider

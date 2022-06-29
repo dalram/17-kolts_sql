@@ -34,10 +34,13 @@ const con1 = mysql.createConnection({
 app.get("/riedziai", (req, res) => {
   const sql = `
     SELECT
-    k.regCode, c.title AS color, isBusy, lastUseTime,  totalRideKilometres, k.id
+    k.regCode, c.title AS color, isBusy, lastUseTime,  totalRideKilometres, k.id, GROUP_CONCAT(com.com, '-^o^-') AS comments, GROUP_CONCAT(com.id) AS coms_id
     FROM kolts AS k
     LEFT JOIN spalva AS c
     ON k.color_id = c.id
+    LEFT JOIN comments AS com
+    ON com.kolt_id = k.id
+    GROUP BY k.id
   `;
   con1.query(sql, (err, result) => {
     if (err) throw err;
@@ -205,6 +208,18 @@ VALUES (?, ?)
   con1.query(sql, [req.body.comment, req.body.koltId], (err, result) => {
     if (err) throw err;
     res.send({ result, msg: { text: "Success!", type: "success" } });
+  });
+});
+
+// delete comment 
+app.delete("/comments/:comId", (req, res) => {
+  const sql = `
+DELETE FROM comments
+WHERE id = ?
+`;
+  con.query(sql, [req.params.comId], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: 'Komentaro pabaiga', type: 'success' } });
   });
 });
 

@@ -7,24 +7,24 @@ function Front() {
   const [colors, setColors] = useState(null);
   const [scooters, setScooters] = useState(null);
   const [createComment, setCreateComment] = useState(null)
-  const [message, setMessage] = useState(null);
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
   useEffect(() => {
     axios.get("http://localhost:3003/front/spalvos").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setColors(res.data);
     });
-  }, []);
+  }, [lastUpdate]);
   useEffect(() => {
     axios.get("http://localhost:3003/front/scooters").then((res) => {
       console.log(res.data);
       setScooters(res.data);
     });
-  }, []);
+  }, [lastUpdate]);
     useEffect(() => {
         if (null === createComment) return;
         axios.post('http://localhost:3003/front/comments', createComment)
           .then(_ => {
-            // setLastUpdate(Date.now());
+            setLastUpdate(Date.now());
           })
       }, [createComment]);
   return (
